@@ -32,18 +32,6 @@ class DeployerRsyncDeployCommand(sublime_plugin.TextCommand):
 		directoryName = os.path.dirname(self.view.window().project_file_name()) + '/'
 
 		#
-		# Run pre-build command (if defined)
-		#
-		if 'build_command' in rsync:
-			print('running build_command ' + rsync['build_command'])
-			sublime.status_message('Running pre-publish build command ' + rsync['build_command'])
-			(stat, out, err) = self.shell_cmd(rsync['build_command'])
-
-			if stat != 0:
-				self.display_text('COMMAND: ' + rsync['build_command'] + '\n\nSTDOUT:\n' + out + '\n\nSTDERR:\n' + err)
-				return
-
-		#
 		# BEGIN build rsync command
 		#
 		cmd = [ 'rsync' ]
